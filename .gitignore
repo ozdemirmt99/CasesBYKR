@@ -1,0 +1,20 @@
+quiz/node_modules
+quiz/.pnp
+quiz/.pnp.js
+
+# testing
+quiz/coverage
+
+# production
+quiz/build
+
+# misc
+quiz/.DS_Store
+quiz/.env.local
+quiz/.env.development.local
+quiz/.env.test.local
+quiz/.env.production.local
+
+quiz/npm-debug.log*
+quiz/yarn-debug.log*
+quiz/yarn-error.log*
