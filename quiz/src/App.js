@@ -27,7 +27,7 @@ export default class App extends Component {
             this.setState({
               choosingEnable: false,
             });
-          } else if (this.state.second >= 15) {
+          } else if (this.state.second >= 30) {
             this.setState({
               second: 0,
               choosingEnable: true,
