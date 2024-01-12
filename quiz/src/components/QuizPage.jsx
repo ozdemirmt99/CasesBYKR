@@ -1,23 +1,43 @@
 import React, { Component } from "react";
 import { Button, Col, Row } from "antd";
+
 export default class QuizPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      selectiona: "asdad",
-      selectionb: "zzxczxc",
-      selectionc: "qweqe",
-      selectiond: "hjghj",
-    };
+    this.state = {};
   }
 
+  spliter = () => {
+    if (this.props.currentQuestion) {
+      const inputs = this.props.currentQuestion.body;
+      const lengtOfBody = inputs?.length;
+      const offsetOfString = lengtOfBody % 4;
+      const inputsArray = [];
+      const distance = (lengtOfBody - offsetOfString) / 4;
+
+      for (let i = 0; i < 4; i++) {
+        inputsArray.push(inputs.substring(i * distance, (i + 1) * distance));
+      }
+
+      return inputsArray;
+    }
+    return ["", "", "", ""];
+  };
+
   render() {
+    const inputs = this.spliter();
     return (
       <>
         <div className="holder">
-          <span>{this.props.stage + 1}.Soru</span><span>{this.props.second}</span>
-          <p>soru ne olduğu</p>
+          <span>
+            {this.props.stage === 10 ? this.props.stage : this.props.stage + 1}
+            .Soru
+          </span>
+          <span>{this.props.second}</span>
+          <p>
+            {this.props.currentQuestion && this.props.currentQuestion.title}
+          </p>
           <div className="choose-area">
             <Col>
               <Row gutter={5} style={{ padding: 5 }}>
@@ -27,7 +47,7 @@ export default class QuizPage extends Component {
                     onClick={() => this.props.onSelectionChange("A")}
                     className="selection-button"
                   >
-                    A) {this.state.selectiona}
+                    A) {inputs[0]}
                   </Button>
                 </Col>
                 <Col span={12}>
@@ -36,7 +56,7 @@ export default class QuizPage extends Component {
                     onClick={() => this.props.onSelectionChange("B")}
                     className="selection-button"
                   >
-                    B) {this.state.selectionb}
+                    B) {inputs[1]}
                   </Button>
                 </Col>
               </Row>
@@ -47,7 +67,7 @@ export default class QuizPage extends Component {
                     onClick={() => this.props.onSelectionChange("C")}
                     className="selection-button"
                   >
-                    C) {this.state.selectionc}
+                    C) {inputs[2]}
                   </Button>
                 </Col>
                 <Col span={12}>
@@ -56,7 +76,7 @@ export default class QuizPage extends Component {
                     onClick={() => this.props.onSelectionChange("D")}
                     className="selection-button"
                   >
-                    D) {this.state.selectiond}
+                    D) {inputs[3]}
                   </Button>
                 </Col>
               </Row>
