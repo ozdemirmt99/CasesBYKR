@@ -44,15 +44,19 @@
 
 }
 .choose-area {
-  background: aqua;
+  background: white;
   margin-bottom: 25px;
   width: 90vw;
-  border-radius: 25px;
+  border-radius: 15px;
   align-items: center;
 }
 
 .selection-button {
   width: 100%;
   text-align: left;
+}
+
+.next-button:disabled {
+  background-color: azure;
 }
 

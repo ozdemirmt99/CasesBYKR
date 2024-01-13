@@ -2,7 +2,7 @@ import "./App.css";
 import axios, { HttpStatusCode } from "axios";
 import QuizPage from "./components/QuizPage";
 import React, { Component } from "react";
-import { Button } from "antd";
+import { Button, Modal, Table } from "antd";
 
 export default class App extends Component {
   constructor(props) {
@@ -16,8 +16,47 @@ export default class App extends Component {
       second: 0,
       choosingEnable: true,
       stage: 0,
+      showResult: false,
     };
   }
+
+  showResultTable = () => {
+    let columns = [
+      {
+        title: "Question",
+        dataIndex: "question",
+        key: "question",
+      },
+      {
+        title: "Answer",
+        dataIndex: "answer",
+        key: "answer",
+      },
+    ];
+    let data = [];
+    let asnwers = this.state.resultMap;
+
+    for (let i = 0; i < 10; i++) {
+      let datum = {
+        key: i,
+        question: i + 1,
+        answer: asnwers.get(i),
+      };
+
+      data.push(datum);
+    }
+
+    return (
+      <Modal
+        open={this.state.showResult}
+        onOk={() => this.setState({ showResult: false })}
+        onCancel={() => this.setState({ showResult: false })}
+        title="Result of Quiz"
+      >
+        <Table columns={columns} dataSource={data} />
+      </Modal>
+    );
+  };
 
   timer = () => {
     const interval = setInterval(() => {
@@ -27,7 +66,8 @@ export default class App extends Component {
             this.setState({
               choosingEnable: false,
             });
-          } else if (this.state.second >= 30) {
+          } else if (this.state.second >= 15) {
+            this.setQuestion();
             this.setState({
               second: 0,
               choosingEnable: true,
@@ -37,6 +77,9 @@ export default class App extends Component {
         });
       } else {
         clearInterval(interval);
+        this.setState({
+          showResult: true,
+        });
       }
     }, 1000);
   };
@@ -104,6 +147,27 @@ export default class App extends Component {
     this.setState({ currentSelection: selection });
   };
 
+  nextQuestion = () => {
+    this.setQuestion();
+
+    this.setState({
+      second: 0,
+      stage: this.state.stage + 1,
+      choosingEnable: true,
+    });
+  };
+
+  setQuestion = () => {
+    let tempMap = this.state.resultMap;
+
+    tempMap.set(this.state.stage, this.state.currentSelection);
+
+    this.setState({
+      resultMap: tempMap,
+      currentSelection: "",
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -117,7 +181,14 @@ export default class App extends Component {
             currentSelection={this.state.currentSelection}
             onSelectionChange={this.onSelectionChange}
           />
-          <Button disabled={this.state.choosingEnable}>Next Question</Button>
+          <Button
+            className="next-button"
+            onClick={this.nextQuestion}
+            disabled={this.state.choosingEnable}
+          >
+            Next Question
+          </Button>
+          {this.showResultTable()}
         </header>
       </div>
     );
