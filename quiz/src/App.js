@@ -66,7 +66,7 @@ export default class App extends Component {
             this.setState({
               choosingEnable: false,
             });
-          } else if (this.state.second >= 15) {
+          } else if (this.state.second >= 30) {
             this.setQuestion();
             this.setState({
               second: 0,
@@ -160,7 +160,12 @@ export default class App extends Component {
   setQuestion = () => {
     let tempMap = this.state.resultMap;
 
-    tempMap.set(this.state.stage, this.state.currentSelection);
+    tempMap.set(
+      this.state.stage,
+      this.state.currentSelection === ""
+        ? "Boş Bırakıldı"
+        : this.state.currentSelection
+    );
 
     this.setState({
       resultMap: tempMap,
@@ -171,8 +176,8 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 style={{ color: "white" }}>Quiz</h1>
+        <div className="App-header">
+          <h1 style={{ color: "white" }}>Quiz App</h1>
           <QuizPage
             currentQuestion={this.state.questionsMap.get(this.state.stage)}
             stage={this.state.stage}
@@ -181,6 +186,8 @@ export default class App extends Component {
             currentSelection={this.state.currentSelection}
             onSelectionChange={this.onSelectionChange}
           />
+          {/* Eğer bu özellik istek dışında kaldıysa aşağıdaki button componentini Yorum satırına çevirebilir ya da
+          silebilirsiniz. Özellik bakımından tutarsız oolacağını düşündüğüm için ekledim  */}
           <Button
             className="next-button"
             onClick={this.nextQuestion}
@@ -188,8 +195,10 @@ export default class App extends Component {
           >
             Next Question
           </Button>
+          {/* Eğer bu özellik istek dışında kaldıysa aşağıdaki button componentini Yorum satırına çevirebilir ya da
+            silebilirsiniz. Özellik bakımından tutarsız oolacağını düşündüğüm için ekledim  */}
           {this.showResultTable()}
-        </header>
+        </div>
       </div>
     );
   }

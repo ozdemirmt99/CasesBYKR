@@ -34,7 +34,9 @@ export default class QuizPage extends Component {
             {this.props.stage === 10 ? this.props.stage : this.props.stage + 1}
             .Soru
           </span>
-          <span>{this.props.second}</span>
+          <span style={{ float: "right", marginRight: 20 }}>
+            Süre {this.props.second}
+          </span>
           <p>
             {this.props.currentQuestion && this.props.currentQuestion.title}
           </p>
@@ -43,6 +45,11 @@ export default class QuizPage extends Component {
               <Row gutter={5} style={{ padding: 5 }}>
                 <Col span={12}>
                   <Button
+                    type={
+                      this.props.currentSelection === "A"
+                        ? "primary"
+                        : "default"
+                    }
                     disabled={this.props.choosingEnable}
                     onClick={() => this.props.onSelectionChange("A")}
                     className="selection-button"
@@ -52,6 +59,11 @@ export default class QuizPage extends Component {
                 </Col>
                 <Col span={12}>
                   <Button
+                    type={
+                      this.props.currentSelection === "B"
+                        ? "primary"
+                        : "default"
+                    }
                     disabled={this.props.choosingEnable}
                     onClick={() => this.props.onSelectionChange("B")}
                     className="selection-button"
@@ -63,6 +75,11 @@ export default class QuizPage extends Component {
               <Row gutter={5} style={{ padding: 5 }}>
                 <Col span={12}>
                   <Button
+                    type={
+                      this.props.currentSelection === "C"
+                        ? "primary"
+                        : "default"
+                    }
                     disabled={this.props.choosingEnable}
                     onClick={() => this.props.onSelectionChange("C")}
                     className="selection-button"
@@ -72,6 +89,11 @@ export default class QuizPage extends Component {
                 </Col>
                 <Col span={12}>
                   <Button
+                    type={
+                      this.props.currentSelection === "D"
+                        ? "primary"
+                        : "default"
+                    }
                     disabled={this.props.choosingEnable}
                     onClick={() => this.props.onSelectionChange("D")}
                     className="selection-button"
