@@ -1,9 +1,11 @@
 #firstTriangle {
-    background-image: url(images/Rectangle\ 31.png);
+    background-image: url(images/Rectangle31.png);
     background-repeat: no-repeat;
-    background-position:bottom;
-    background-size: contain;
+    background-position:center center;
+    /* background-size: contain; */
+    background-size: 100%;
     background-position-x: 15px;
+    height: 100%;
 }
 
 #inFour {
