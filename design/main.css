@@ -1,0 +1,36 @@
+#firstTriangle {
+    background-image: url(images/Rectangle\ 31.png);
+    background-repeat: no-repeat;
+    background-position:bottom;
+    background-size: contain;
+    background-position-x: 15px;
+}
+
+#inFour {
+    background-image: url(images/Waves.png);
+    width: 100%;
+    height: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#five {
+    height: 717px;
+    background-color: #78350F;
+}
+#chartFive {
+    background-image: url(images/chart.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+}
+
+#inChart {
+    background-image: url(images/Ellipses.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
